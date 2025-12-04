@@ -1,0 +1,115 @@
+/* src/App.css */
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.main-layout {
+  display: flex;
+  flex: 1; 
+  padding: 24px;
+  gap: 24px;
+  position: relative;
+}
+
+.content-area {
+  flex: 1; 
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.app-footer {
+  background-color: white; 
+  padding: 20px 0;
+  text-align: center;
+  color: #888;
+  font-size: 14px;
+
+ 
+  margin-top: auto;
+
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.05);
+}
+
+/* Wrapper Sidebar Desktop */
+.sidebar-wrapper {
+  display: block; /* Selalu tampil di desktop */
+}
+
+/* Konten Utama */
+.content-area {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  min-width: 0; /* PENTING: Mencegah tabel melebarkan layout flex */
+}
+
+.sidebar-overlay {
+  display: none; /* Tidak butuh overlay di desktop */
+}
+
+/* =========================================
+   MEDIA QUERY UNTUK TABLET & HP (Max 992px)
+   ========================================= */
+@media (max-width: 992px) {
+  
+  .main-layout {
+    padding: 16px; /* Padding lebih kecil di HP */
+    gap: 0;
+  }
+
+  /* 1. Sidebar berubah menjadi "Off-Canvas" (Tersembunyi di kiri) */
+  .sidebar-wrapper {
+    position: fixed;
+    top: 0;
+    left: -300px; /* Sembunyikan di luar layar kiri */
+    width: 280px;
+    height: 100vh;
+    z-index: 1000; /* Harus di atas konten */
+    transition: left 0.3s ease-in-out;
+  }
+
+  /* 2. Class ini ditambahkan oleh React saat tombol menu diklik */
+  .sidebar-wrapper.open {
+    left: 0; /* Munculkan ke layar */
+  }
+
+  /* 3. Overlay Hitam (Latar belakang gelap saat sidebar muncul) */
+  .sidebar-overlay {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: -1; /* Di belakang sidebar, tapi di depan konten */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease;
+  }
+
+  /* Saat sidebar open, overlay muncul */
+  .sidebar-wrapper.open .sidebar-overlay {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  /* 4. Pastikan komponen Sidebar.jsx mengisi tinggi penuh */
+  /* Kita perlu menargetkan class dari module css sidebar, 
+     tapi karena ini global css, kita asumsikan strukturnya pas. */
+  .sidebar-wrapper > aside {
+    height: 100%;
+    border-radius: 0 20px 20px 0; /* Radius hanya di kanan */
+  }
+
+  /* 5. Konten mengambil lebar penuh */
+  .content-area {
+    width: 100%;
+    margin-left: 0;
+  }
+}

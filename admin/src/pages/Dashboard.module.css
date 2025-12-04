@@ -1,0 +1,85 @@
+/* src/pages/Dashboard.module.css */
+.welcomeTitle {
+  font-size: 28px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 24px; 
+}
+
+/* 1. Container utama untuk Stat Cards + Donut Chart */
+.mainRow {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+/* 2. Grid 2x2 untuk Stat Cards */
+.statGrid {
+  flex: 1; 
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+/* 3. Atur Donut Chart agar mengambil setengah bagian */
+.mainRow .chartBlock {
+  flex: 1; 
+}
+
+
+/* --- TATA LETAK GRID BAWAH (Sisa Chart) --- */
+.bottomGrid {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr; 
+  gap: 24px;
+}
+
+/* Style dasar untuk semua kotak chart */
+.chartBlock {
+  background-color: white;
+  border-radius: 20px;
+  padding: 24px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+}
+
+.chartBlock h3 {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: #444;
+}
+
+/* Style spesifik untuk chart di grid bawah (jika perlu) */
+.customBarBlock {
+}
+.groupedBarBlock {
+}
+
+.footer {
+  text-align: center;
+  padding: 20px 0;
+  color: #888;
+  font-size: 14px;
+  margin-top: 24px;
+}
+
+
+@media (max-width: 992px) {
+  .mainRow {
+    flex-direction: column;
+  }
+  .statGrid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .bottomGrid {
+    grid-template-columns: 1fr; 
+  }
+}
+
+@media (max-width: 576px) {
+  .statGrid {
+    grid-template-columns: 1fr;
+  }
+}
